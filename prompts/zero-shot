@@ -1,0 +1,3 @@
+Our dynamic analysis tool identified a taint flow in a Node.js package, suggesting a potential vulnerability related to either arbitrary code execution (CWE-094) or arbitrary command injection (CWE-078). While the tool attempts to confirm vulnerabilities by generating exploits, this approach may miss some cases. I hope you can assist with triaging and classification by predicting whether the vulnerability is exploitable.
+
+I have extracted relevant parts of the code from the file containing the sink, along with surrounding lines for context. After reasoning about the snippet, please output "Yes" if you believe it contains an exploitable vulnerability, or "No" if you believe it is not exploitable.

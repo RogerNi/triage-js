@@ -1,0 +1,28 @@
+*.log
+*saved_models*/
+__pycache__
+tensorboard/
+*logs/
+*.out
+wandb
+simple_llm_results*
+dataset/
+openrouter*
+simple_llm*
+slurm_logs/
+filtered_pkg.json
+*.key
+
+cohen_kappa/
+plot_scripts/
+prec_recall_plot/
+
+# large datasets (shipped separately, not tracked)
+dataset_noflow*/
+dataset_combined/
+filtered_flows.json
+benchmark_analysis/shap_html/
+benchmark_analysis/shap_raw/
+
+# benchmark archives (shipped separately, not tracked)
+data_util/*.zip
