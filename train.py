@@ -313,9 +313,17 @@ def main():
     parser.add_argument("--dataloader_return_only_func", default=False, action="store_true", help="Dataloader return only func")
     parser.add_argument("--output_final_embeddings", default=False, action="store_true", help="Output final embeddings for all data")
     parser.add_argument("--run_baseline_on_final_embeddings", default=False, action="store_true", help="Run baseline on final embeddings")
-    
+    parser.add_argument("--wandb", default=False, action="store_true", help="Enable Weights & Biases logging. Disabled by default so the pipeline runs self-contained (no network/account).")
+
     args = parser.parse_args()
-    
+
+    # Weights & Biases is opt-in. By default disable it entirely so runs are
+    # self-contained (no network calls, no account) — required for artifact eval.
+    if not args.wandb:
+        os.environ["WANDB_DISABLED"] = "true"
+        os.environ["WANDB_MODE"] = "disabled"
+    report_to = ["wandb"] if args.wandb else "none"
+
     def is_CoT():
         return any([x in args.model_name_or_path for x in ["DeepSeek"]])
 
@@ -507,6 +515,7 @@ def main():
             save_safetensors=False,
             run_name=args.model_name,
             seed=args.seed,
+            report_to=report_to,
         )
         trainerModule = Trainer
         trainer = trainerModule(
@@ -540,8 +549,9 @@ def main():
             weight_decay=args.weight_decay,
             remove_unused_columns=False,
             run_name=args.model_name,
+            report_to=report_to,
         )
-        
+
         trainer = Trainer(
             model = llm_model,
             args=training_args,
