@@ -18,6 +18,7 @@ the authors (see "Dataset" below).
 
 ```
 dataset/                    TRIAGE-JS benchmark (NOT included — see "Dataset" below)
+dataset_demo/               small public demo subset for functional testing (see "Demo subset")
 data_util/                  dataset construction pipeline (raw/preprocessed archives ship with the dataset)
 train.py                    GNN / LLM / hybrid training and evaluation entry point
 baseline.py                 classical ML baselines (RF, XGBoost, LogReg, SVM)
@@ -67,6 +68,25 @@ contacting the authors.
 Once obtained, the dataset ships with the `data_util/` raw and preprocessed
 archives; unpack them and run `data_util/build_metadata_and_graph.py`
 followed by `data_util/build_llm_input.py` to (re)build `dataset/`.
+
+### Demo subset for functional testing
+
+So that users can understand the data format and test the functionality of the
+pipeline without access to the withheld benchmark, we provide a small demo
+subset in `dataset_demo/`. It is a stratified 10% sample of the graphs (188
+graphs, preserving the confirmed/false-alarm ratio) with the same schema and
+file layout as `dataset/`, so it is a drop-in `--data_folder` for `train.py`.
+
+It is noteworthy that the actual package source code in
+`node_information_per_graph.csv` has been **replaced with synthetic,
+clearly-marked snippets**, and all package-identifying fields (name, version,
+file path) have been redacted, so that no code or identity of a package under
+coordinated disclosure is published. The **provenance graphs and labels are the
+real benchmark values**, so the GNN path produces genuine results; the code/LLM
+path runs end-to-end on the synthetic snippets, which demonstrates that the
+pipeline is functional but does not reproduce the paper's numbers on real code.
+The real code is part of the benchmark released after the disclosure period
+completes.
 
 ## Reproducing the paper's results
 
