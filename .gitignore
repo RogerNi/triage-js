@@ -26,3 +26,6 @@ benchmark_analysis/shap_raw/
 
 # benchmark archives (shipped separately, not tracked)
 data_util/*.zip
+
+# demo generator — kept local, needs the withheld full benchmark to run
+make_demo_subset.py

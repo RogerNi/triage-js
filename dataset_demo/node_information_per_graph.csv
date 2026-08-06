@@ -1,0 +1,1542 @@
+graph_idx,node_idx,package,version,operation,value,file,code_full,code,startLineNumber,startColumnNumber,endLineNumber,endColumnNumber,tainted,flows_from,sink_type
+0,1,pkg_0000,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0000 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:spawnWithSignal)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",9,10,9,68,True,2,spawn
+1,1,pkg_0001,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0001 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:exec)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",203,7,209,9,True,2,exec
+2,1,pkg_0002,0.0.0,call:Function,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0002 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:Function)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",258,14,258,67,True,2,Function
+3,1,pkg_0003,0.0.0,call:execSync,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0003 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:execSync)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",243,7,244,30,True,2,exec
+4,1,pkg_0004,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0004 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:spawnWithSignal)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",11,20,11,61,False,2,spawn
+5,1,pkg_0005,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0005 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:exec)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",49,14,49,56,True,2,exec
+6,1,pkg_0006,0.0.0,call:Function,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0006 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:Function)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",218,10,218,66,True,2,Function
+7,1,pkg_0007,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0007 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:exec)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",62,3,96,5,True,2,exec
+8,1,pkg_0008,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0008 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:spawnWithSignal)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",98,17,98,59,True,2,spawn
+9,1,pkg_0009,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0009 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:exec)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",18,5,18,18,True,2,exec
+10,1,pkg_0010,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0010 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:spawnWithSignal)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",78,14,78,30,False,2,spawn
+11,1,pkg_0011,0.0.0,call:Function,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0011 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:Function)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",88,12,88,45,True,2,Function
+12,1,pkg_0012,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0012 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:spawnWithSignal)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",24,14,24,41,False,2,spawn
+13,1,pkg_0013,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0013 — not derived from any real package
+function handler(req) {
+  // parse a constant, well-formed structure; no dynamic sink (call:exec)
+  const cfg = JSON.parse('{""mode"":""safe""}');
+  return cfg.mode;
+}
+module.exports = handler;
+",5,3,10,5,False,2,exec
+14,1,pkg_0014,0.0.0,call:eval,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0014 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:eval)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",11,10,11,69,True,2,eval
+15,1,pkg_0015,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0015 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:spawnWithSignal)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",25,10,25,69,True,2,spawn
+16,1,pkg_0016,0.0.0,call:eval,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0016 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:eval)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",2,330,2,391,True,2,eval
+17,1,pkg_0017,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0017 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:spawnWithSignal)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",12,17,12,70,True,2,spawn
+18,1,pkg_0018,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0018 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:exec)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",78,5,105,7,True,2,exec
+19,1,pkg_0019,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0019 — not derived from any real package
+function handler(req) {
+  // parse a constant, well-formed structure; no dynamic sink (call:spawnWithSignal)
+  const cfg = JSON.parse('{""mode"":""safe""}');
+  return cfg.mode;
+}
+module.exports = handler;
+",27,17,27,71,False,2,spawn
+20,1,pkg_0020,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0020 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:spawnWithSignal)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",25,10,25,69,True,2,spawn
+21,1,pkg_0021,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0021 — not derived from any real package
+function handler(req) {
+  // parse a constant, well-formed structure; no dynamic sink (call:spawnWithSignal)
+  const cfg = JSON.parse('{""mode"":""safe""}');
+  return cfg.mode;
+}
+module.exports = handler;
+",23,26,31,4,False,2,spawn
+22,1,pkg_0022,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0022 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:spawnWithSignal)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",43,17,48,4,False,2,spawn
+23,1,pkg_0023,0.0.0,call:Function,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0023 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:Function)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",153,14,153,42,True,2,Function
+24,1,pkg_0024,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0024 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:spawnWithSignal)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",70,18,70,99,False,2,spawn
+25,1,pkg_0025,0.0.0,call:Function,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0025 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:Function)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",42,16,42,77,True,2,Function
+26,1,pkg_0026,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0026 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:exec)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",15,15,22,16,False,2,exec
+27,1,pkg_0027,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0027 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:exec)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",66,12,92,5,True,2,exec
+28,1,pkg_0028,0.0.0,call:execSync,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0028 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:execSync)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",21,18,21,58,True,2,exec
+29,1,pkg_0029,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0029 — not derived from any real package
+function handler(req) {
+  // parse a constant, well-formed structure; no dynamic sink (call:spawnWithSignal)
+  const cfg = JSON.parse('{""mode"":""safe""}');
+  return cfg.mode;
+}
+module.exports = handler;
+",51,16,51,111,False,2,spawn
+30,1,pkg_0030,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0030 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:spawnWithSignal)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",12,17,12,70,True,2,spawn
+31,1,pkg_0031,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0031 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:spawnWithSignal)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",22,10,22,69,True,2,spawn
+32,1,pkg_0032,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0032 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:spawnWithSignal)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",56,11,56,49,True,2,spawn
+33,1,pkg_0033,0.0.0,call:spawnSync,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0033 — not derived from any real package
+function handler(req) {
+  // parse a constant, well-formed structure; no dynamic sink (call:spawnSync)
+  const cfg = JSON.parse('{""mode"":""safe""}');
+  return cfg.mode;
+}
+module.exports = handler;
+",26,16,26,73,True,2,spawn
+34,1,pkg_0034,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0034 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:spawnWithSignal)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",41,28,41,67,True,2,spawn
+35,1,pkg_0035,0.0.0,call:Function,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0035 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:Function)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",311,10,311,24,True,2,Function
+36,1,pkg_0036,0.0.0,call:Function,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0036 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:Function)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",47,10,47,43,True,2,Function
+37,1,pkg_0037,0.0.0,call:Anonymous Function,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0037 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:Anonymous Function)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",18,10,18,23,True,2,exec
+38,1,pkg_0038,0.0.0,call:Function,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0038 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:Function)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",1,6112,1,6155,True,2,Function
+39,1,pkg_0039,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0039 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:exec)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",32,3,43,5,True,2,exec
+40,1,pkg_0040,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0040 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:spawnWithSignal)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",121,21,122,82,False,2,spawn
+41,1,pkg_0041,0.0.0,call:eval,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0041 — not derived from any real package
+function handler(req) {
+  // parse a constant, well-formed structure; no dynamic sink (call:eval)
+  const cfg = JSON.parse('{""mode"":""safe""}');
+  return cfg.mode;
+}
+module.exports = handler;
+",260,31,260,60,True,2,eval
+42,1,pkg_0042,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0042 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:spawnWithSignal)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",42,14,42,41,False,2,spawn
+43,1,pkg_0043,0.0.0,call:execSync,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0043 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:execSync)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",62,18,62,56,True,2,exec
+44,1,pkg_0044,0.0.0,call:Function,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0044 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:Function)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",215,14,215,67,True,2,Function
+45,1,pkg_0045,0.0.0,call:Function,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0045 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:Function)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",206,14,206,36,True,2,Function
+46,1,pkg_0046,0.0.0,call:Function,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0046 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:Function)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",288,15,288,48,True,2,Function
+47,1,pkg_0047,0.0.0,call:Function,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0047 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:Function)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",200,14,200,40,True,2,Function
+48,1,pkg_0048,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0048 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:spawnWithSignal)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",18,12,21,9,True,2,spawn
+49,1,pkg_0049,0.0.0,call:execSync,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0049 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:execSync)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",23,20,23,33,True,2,exec
+50,1,pkg_0050,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0050 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:spawnWithSignal)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",36,21,36,94,False,2,spawn
+51,1,pkg_0051,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0051 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:exec)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",77,17,87,7,True,2,exec
+52,1,pkg_0052,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0052 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:exec)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",19,5,19,34,True,2,exec
+53,1,pkg_0053,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0053 — not derived from any real package
+function handler(req) {
+  // parse a constant, well-formed structure; no dynamic sink (call:spawnWithSignal)
+  const cfg = JSON.parse('{""mode"":""safe""}');
+  return cfg.mode;
+}
+module.exports = handler;
+",27,17,27,106,False,2,spawn
+54,1,pkg_0054,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0054 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:exec)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",8,15,15,17,True,2,exec
+55,1,pkg_0055,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0055 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:exec)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",91,5,91,57,True,2,exec
+56,1,pkg_0056,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0056 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:exec)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",68,13,70,9,True,2,exec
+57,1,pkg_0057,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0057 — not derived from any real package
+function handler(req) {
+  // parse a constant, well-formed structure; no dynamic sink (call:spawnWithSignal)
+  const cfg = JSON.parse('{""mode"":""safe""}');
+  return cfg.mode;
+}
+module.exports = handler;
+",17,10,17,42,False,2,spawn
+58,1,pkg_0058,0.0.0,call:Function,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0058 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:Function)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",43,12,43,134,True,2,Function
+59,1,pkg_0059,0.0.0,call:eval,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0059 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:eval)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",5,18,5,68,True,2,eval
+60,1,pkg_0060,0.0.0,call:spawnSync,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0060 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:spawnSync)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",25,19,29,8,False,2,spawn
+61,1,pkg_0061,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0061 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:exec)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",12,5,14,7,True,2,exec
+62,1,pkg_0062,0.0.0,call:execSync,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0062 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:execSync)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",23,20,23,33,True,2,exec
+63,1,pkg_0063,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0063 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:exec)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",44,7,47,9,True,2,exec
+64,1,pkg_0064,0.0.0,call:spawnSync,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0064 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:spawnSync)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",23,18,23,51,False,2,spawn
+65,1,pkg_0065,0.0.0,call:execSync,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0065 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:execSync)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",36,7,36,24,True,2,exec
+66,1,pkg_0066,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0066 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:spawnWithSignal)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",37,16,37,104,False,2,spawn
+67,1,pkg_0067,0.0.0,call:Function,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0067 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:Function)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",21,10,21,53,True,2,Function
+68,1,pkg_0068,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0068 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:spawnWithSignal)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",10,10,10,69,True,2,spawn
+69,1,pkg_0069,0.0.0,call:Function,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0069 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:Function)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",5,10,5,65,True,2,Function
+70,1,pkg_0070,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0070 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:exec)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",10,5,15,7,True,2,exec
+71,1,pkg_0071,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0071 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:spawnWithSignal)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",12,17,12,70,True,2,spawn
+72,1,pkg_0072,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0072 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:exec)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",11,5,13,7,False,2,exec
+73,1,pkg_0073,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0073 — not derived from any real package
+function handler(req) {
+  // parse a constant, well-formed structure; no dynamic sink (call:spawnWithSignal)
+  const cfg = JSON.parse('{""mode"":""safe""}');
+  return cfg.mode;
+}
+module.exports = handler;
+",11,12,11,36,False,2,spawn
+74,1,pkg_0074,0.0.0,call:Function,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0074 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:Function)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",17,20,17,76,True,2,Function
+75,1,pkg_0075,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0075 — not derived from any real package
+function handler(req) {
+  // parse a constant, well-formed structure; no dynamic sink (call:spawnWithSignal)
+  const cfg = JSON.parse('{""mode"":""safe""}');
+  return cfg.mode;
+}
+module.exports = handler;
+",74,13,74,55,False,2,spawn
+76,1,pkg_0076,0.0.0,call:anonymous,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0076 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:anonymous)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",15,12,15,104,True,2,Function
+77,1,pkg_0077,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0077 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:spawnWithSignal)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",56,17,56,57,True,2,spawn
+78,1,pkg_0078,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0078 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:exec)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",15,3,18,5,True,2,exec
+79,1,pkg_0079,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0079 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:exec)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",229,5,229,28,True,2,exec
+80,1,pkg_0080,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0080 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:spawnWithSignal)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",25,10,25,69,True,2,spawn
+81,1,pkg_0081,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0081 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:spawnWithSignal)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",22,20,22,42,True,2,spawn
+82,1,pkg_0082,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0082 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:spawnWithSignal)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",78,22,78,46,False,2,spawn
+83,1,pkg_0083,0.0.0,call:execSync,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0083 — not derived from any real package
+function handler(req) {
+  // parse a constant, well-formed structure; no dynamic sink (call:execSync)
+  const cfg = JSON.parse('{""mode"":""safe""}');
+  return cfg.mode;
+}
+module.exports = handler;
+",25,17,25,90,False,2,exec
+84,1,pkg_0084,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0084 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:spawnWithSignal)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",65,38,71,19,False,2,spawn
+85,1,pkg_0085,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0085 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:spawnWithSignal)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",19,10,19,47,True,2,spawn
+86,1,pkg_0086,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0086 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:spawnWithSignal)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",27,10,27,69,True,2,spawn
+87,1,pkg_0087,0.0.0,call:Function,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0087 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:Function)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",296,14,296,67,True,2,Function
+88,1,pkg_0088,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0088 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:exec)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",11,5,16,7,True,2,exec
+89,1,pkg_0089,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0089 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:exec)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",20,5,36,7,True,2,exec
+90,1,pkg_0090,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0090 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:exec)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",8,3,12,5,True,2,exec
+91,1,pkg_0091,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0091 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:exec)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",36,5,41,7,True,2,exec
+92,1,pkg_0092,0.0.0,call:eval,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0092 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:eval)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",133,17,133,46,True,2,eval
+93,1,pkg_0093,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0093 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:spawnWithSignal)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",53,14,53,43,False,2,spawn
+94,1,pkg_0094,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0094 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:exec)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",14,5,23,7,True,2,exec
+95,1,pkg_0095,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0095 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:exec)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",36,3,40,5,True,2,exec
+96,1,pkg_0096,0.0.0,call:Function,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0096 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:Function)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",103,5,103,36,True,2,Function
+97,1,pkg_0097,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0097 — not derived from any real package
+function handler(req) {
+  // parse a constant, well-formed structure; no dynamic sink (call:spawnWithSignal)
+  const cfg = JSON.parse('{""mode"":""safe""}');
+  return cfg.mode;
+}
+module.exports = handler;
+",114,20,114,90,False,2,spawn
+98,1,pkg_0098,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0098 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:spawnWithSignal)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",56,10,56,69,True,2,spawn
+99,1,pkg_0099,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0099 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:exec)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",70,3,106,4,True,2,exec
+100,1,pkg_0100,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0100 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:exec)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",90,15,94,15,True,2,exec
+101,1,pkg_0101,0.0.0,call:eval,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0101 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:eval)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",20,25,20,36,True,2,eval
+102,1,pkg_0102,0.0.0,call:execSync,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0102 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:execSync)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",27,10,27,77,False,2,exec
+103,1,pkg_0103,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0103 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:exec)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",26,5,40,7,True,2,exec
+104,1,pkg_0104,0.0.0,call:Function,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0104 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:Function)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",144,25,144,81,True,2,Function
+105,1,pkg_0105,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0105 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:exec)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",32,15,40,4,True,2,exec
+106,1,pkg_0106,0.0.0,call:execSync,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0106 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:execSync)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",19,13,19,26,True,2,exec
+107,1,pkg_0107,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0107 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:spawnWithSignal)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",15,17,15,42,True,2,spawn
+108,1,pkg_0108,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0108 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:spawnWithSignal)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",13,26,13,46,False,2,spawn
+109,1,pkg_0109,0.0.0,call:Function,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0109 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:Function)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",103,20,103,73,True,2,Function
+110,1,pkg_0110,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0110 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:exec)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",17,7,23,9,True,2,exec
+111,1,pkg_0111,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0111 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:exec)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",86,9,93,11,True,2,exec
+112,1,pkg_0112,0.0.0,call:eval,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0112 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:eval)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",28,12,30,34,True,2,eval
+113,1,pkg_0113,0.0.0,call:Function,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0113 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:Function)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",52,12,52,57,True,2,Function
+114,1,pkg_0114,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0114 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:spawnWithSignal)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",22,12,29,4,False,2,spawn
+115,1,pkg_0115,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0115 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:spawnWithSignal)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",31,10,31,69,True,2,spawn
+116,1,pkg_0116,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0116 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:exec)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",10,10,10,62,True,2,exec
+117,1,pkg_0117,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0117 — not derived from any real package
+function handler(req) {
+  // parse a constant, well-formed structure; no dynamic sink (call:spawnWithSignal)
+  const cfg = JSON.parse('{""mode"":""safe""}');
+  return cfg.mode;
+}
+module.exports = handler;
+",6,20,9,4,False,2,spawn
+118,1,pkg_0118,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0118 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:spawnWithSignal)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",81,13,83,5,False,2,spawn
+119,1,pkg_0119,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0119 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:spawnWithSignal)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",310,15,310,37,False,2,spawn
+120,1,pkg_0120,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0120 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:spawnWithSignal)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",37,16,37,104,False,2,spawn
+121,1,pkg_0121,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0121 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:spawnWithSignal)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",100,17,100,49,True,2,spawn
+122,1,pkg_0122,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0122 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:spawnWithSignal)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",27,10,27,69,True,2,spawn
+123,1,pkg_0123,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0123 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:spawnWithSignal)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",7,26,7,52,True,2,spawn
+124,1,pkg_0124,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0124 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:spawnWithSignal)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",44,14,50,5,True,2,spawn
+125,1,pkg_0125,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0125 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:exec)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",15,3,22,5,True,2,exec
+126,1,pkg_0126,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0126 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:exec)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",39,17,47,11,True,2,exec
+127,1,pkg_0127,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0127 — not derived from any real package
+function handler(req) {
+  // parse a constant, well-formed structure; no dynamic sink (call:spawnWithSignal)
+  const cfg = JSON.parse('{""mode"":""safe""}');
+  return cfg.mode;
+}
+module.exports = handler;
+",17,13,17,66,False,2,spawn
+128,1,pkg_0128,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0128 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:spawnWithSignal)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",7,19,7,44,False,2,spawn
+129,1,pkg_0129,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0129 — not derived from any real package
+function handler(req) {
+  // parse a constant, well-formed structure; no dynamic sink (call:spawnWithSignal)
+  const cfg = JSON.parse('{""mode"":""safe""}');
+  return cfg.mode;
+}
+module.exports = handler;
+",48,12,48,32,False,2,spawn
+130,1,pkg_0130,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0130 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:spawnWithSignal)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",25,10,25,69,True,2,spawn
+131,1,pkg_0131,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0131 — not derived from any real package
+function handler(req) {
+  // parse a constant, well-formed structure; no dynamic sink (call:spawnWithSignal)
+  const cfg = JSON.parse('{""mode"":""safe""}');
+  return cfg.mode;
+}
+module.exports = handler;
+",3,15,3,61,False,2,spawn
+132,1,pkg_0132,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0132 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:spawnWithSignal)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",128,14,128,37,True,2,spawn
+133,1,pkg_0133,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0133 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:spawnWithSignal)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",27,10,27,69,True,2,spawn
+134,1,pkg_0134,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0134 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:spawnWithSignal)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",29,10,29,69,True,2,spawn
+135,1,pkg_0135,0.0.0,call:eval,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0135 — not derived from any real package
+function handler(req) {
+  // parse a constant, well-formed structure; no dynamic sink (call:eval)
+  const cfg = JSON.parse('{""mode"":""safe""}');
+  return cfg.mode;
+}
+module.exports = handler;
+",41,46,41,75,True,2,eval
+136,1,pkg_0136,0.0.0,call:Function,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0136 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:Function)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",85,14,85,42,True,2,Function
+137,1,pkg_0137,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0137 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:spawnWithSignal)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",70,15,76,4,True,2,spawn
+138,1,pkg_0138,0.0.0,call:Function,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0138 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:Function)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",75,14,75,41,True,2,Function
+139,1,pkg_0139,0.0.0,call:eval,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0139 — not derived from any real package
+function handler(req) {
+  // parse a constant, well-formed structure; no dynamic sink (call:eval)
+  const cfg = JSON.parse('{""mode"":""safe""}');
+  return cfg.mode;
+}
+module.exports = handler;
+",10,16,10,76,True,2,eval
+140,1,pkg_0140,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0140 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:spawnWithSignal)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",42,15,42,38,False,2,spawn
+141,1,pkg_0141,0.0.0,call:execSync,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0141 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:execSync)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",7,13,7,57,True,2,exec
+142,1,pkg_0142,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0142 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:spawnWithSignal)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",26,15,26,37,True,2,spawn
+143,1,pkg_0143,0.0.0,call:Function,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0143 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:Function)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",64,22,64,62,False,2,Function
+144,1,pkg_0144,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0144 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:spawnWithSignal)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",44,19,46,7,False,2,spawn
+145,1,pkg_0145,0.0.0,call:execSync,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0145 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:execSync)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",65,5,65,71,True,2,exec
+146,1,pkg_0146,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0146 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:exec)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",6,5,15,7,True,2,exec
+147,1,pkg_0147,0.0.0,call:execSync,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0147 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:execSync)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",95,16,95,79,True,2,exec
+148,1,pkg_0148,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0148 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:spawnWithSignal)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",34,14,34,36,False,2,spawn
+149,1,pkg_0149,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0149 — not derived from any real package
+function handler(req) {
+  // parse a constant, well-formed structure; no dynamic sink (call:spawnWithSignal)
+  const cfg = JSON.parse('{""mode"":""safe""}');
+  return cfg.mode;
+}
+module.exports = handler;
+",7,5,7,44,True,2,spawn
+150,1,pkg_0150,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0150 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:spawnWithSignal)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",52,18,52,51,False,2,spawn
+151,1,pkg_0151,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0151 — not derived from any real package
+function handler(req) {
+  // parse a constant, well-formed structure; no dynamic sink (call:spawnWithSignal)
+  const cfg = JSON.parse('{""mode"":""safe""}');
+  return cfg.mode;
+}
+module.exports = handler;
+",6,18,9,6,True,2,spawn
+152,1,pkg_0152,0.0.0,call:execSync,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0152 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:execSync)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",5,20,5,65,True,2,exec
+153,1,pkg_0153,0.0.0,call:eval,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0153 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:eval)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",40,23,40,94,True,2,eval
+154,1,pkg_0154,0.0.0,call:execSync,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0154 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:execSync)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",8,12,8,69,False,2,exec
+155,1,pkg_0155,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0155 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:spawnWithSignal)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",14,29,14,67,True,2,spawn
+156,1,pkg_0156,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0156 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:exec)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",8,3,13,5,True,2,exec
+157,1,pkg_0157,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0157 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:spawnWithSignal)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",26,15,26,49,True,2,spawn
+158,1,pkg_0158,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0158 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:spawnWithSignal)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",6,14,6,93,False,2,spawn
+159,1,pkg_0159,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0159 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:exec)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",4,10,4,38,True,2,exec
+160,1,pkg_0160,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0160 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:exec)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",88,3,99,5,True,2,exec
+161,1,pkg_0161,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0161 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:exec)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",19,5,26,9,False,2,exec
+162,1,pkg_0162,0.0.0,call:Function,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0162 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:Function)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",1,213,1,347,True,2,Function
+163,1,pkg_0163,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0163 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:spawnWithSignal)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",22,14,22,31,True,2,spawn
+164,1,pkg_0164,0.0.0,call:Anonymous Function,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0164 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:Anonymous Function)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",74,17,74,42,True,2,exec
+165,1,pkg_0165,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0165 — not derived from any real package
+function handler(req) {
+  // parse a constant, well-formed structure; no dynamic sink (call:exec)
+  const cfg = JSON.parse('{""mode"":""safe""}');
+  return cfg.mode;
+}
+module.exports = handler;
+",69,7,96,9,False,2,exec
+166,1,pkg_0166,0.0.0,call:Function,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0166 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:Function)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",1,2731,1,2772,True,2,Function
+167,1,pkg_0167,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0167 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:spawnWithSignal)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",15,10,15,63,True,2,spawn
+168,1,pkg_0168,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0168 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:exec)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",12,3,12,26,True,2,exec
+169,1,pkg_0169,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0169 — not derived from any real package
+function handler(req) {
+  // parse a constant, well-formed structure; no dynamic sink (call:spawnWithSignal)
+  const cfg = JSON.parse('{""mode"":""safe""}');
+  return cfg.mode;
+}
+module.exports = handler;
+",88,22,88,46,False,2,spawn
+170,1,pkg_0170,0.0.0,call:Function,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0170 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:Function)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",63,18,63,164,True,2,Function
+171,1,pkg_0171,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0171 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:exec)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",46,3,128,5,True,2,exec
+172,1,pkg_0172,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0172 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:spawnWithSignal)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",40,19,40,103,False,2,spawn
+173,1,pkg_0173,0.0.0,call:eval,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0173 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:eval)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",6,17,6,67,True,2,eval
+174,1,pkg_0174,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0174 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:spawnWithSignal)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",5,10,12,4,False,2,spawn
+175,1,pkg_0175,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0175 — not derived from any real package
+function handler(req) {
+  // parse a constant, well-formed structure; no dynamic sink (call:spawnWithSignal)
+  const cfg = JSON.parse('{""mode"":""safe""}');
+  return cfg.mode;
+}
+module.exports = handler;
+",31,18,31,56,False,2,spawn
+176,1,pkg_0176,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0176 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:spawnWithSignal)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",26,13,26,35,False,2,spawn
+177,1,pkg_0177,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0177 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:exec)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",37,3,47,5,True,2,exec
+178,1,pkg_0178,0.0.0,call:execSync,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0178 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:execSync)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",46,15,46,42,True,2,exec
+179,1,pkg_0179,0.0.0,call:eval,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0179 — not derived from any real package
+function handler(req) {
+  // parse a constant, well-formed structure; no dynamic sink (call:eval)
+  const cfg = JSON.parse('{""mode"":""safe""}');
+  return cfg.mode;
+}
+module.exports = handler;
+",482,17,489,13,True,2,eval
+180,1,pkg_0180,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0180 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:exec)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",24,3,26,5,True,2,exec
+181,1,pkg_0181,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0181 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:spawnWithSignal)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",12,17,12,70,True,2,spawn
+182,1,pkg_0182,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0182 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:exec)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",13,3,13,34,True,2,exec
+183,1,pkg_0183,0.0.0,call:execSync,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0183 — not derived from any real package
+function handler(req) {
+  const payload = req.query.data;
+  // unsafe dynamic evaluation of attacker-controlled input (call:execSync)
+  return Function('return ' + payload)();
+}
+module.exports = handler;
+",119,7,119,40,True,2,exec
+184,1,pkg_0184,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0184 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // input is sanitized to an allowlist before use (call:spawnWithSignal)
+  const arg = String(input).replace(/[^a-z0-9_.-]/gi, '');
+  return cp.execFile('run', ['--target', arg]);
+}
+module.exports = handler;
+",56,40,56,84,False,2,spawn
+185,1,pkg_0185,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0185 — not derived from any real package
+function handler(req) {
+  // parse a constant, well-formed structure; no dynamic sink (call:spawnWithSignal)
+  const cfg = JSON.parse('{""mode"":""safe""}');
+  return cfg.mode;
+}
+module.exports = handler;
+",14,17,14,142,False,2,spawn
+186,1,pkg_0186,0.0.0,call:exec,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0186 — not derived from any real package
+const cp = require('child_process');
+function handler(input) {
+  // tainted value flows unsanitized into a command sink (call:exec)
+  return cp.exec('run --target ' + input);
+}
+module.exports = handler;
+",28,3,56,5,True,2,exec
+187,1,pkg_0187,0.0.0,call:spawnWithSignal,redacted,redacted,redacted,"// SYNTHETIC SAMPLE #0187 — not derived from any real package
+function handler(req) {
+  // parse a constant, well-formed structure; no dynamic sink (call:spawnWithSignal)
+  const cfg = JSON.parse('{""mode"":""safe""}');
+  return cfg.mode;
+}
+module.exports = handler;
+",74,21,74,59,False,2,spawn
