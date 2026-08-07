@@ -143,7 +143,7 @@ are SLURM batch files (`sbatch <script>`); adapt the headers to your cluster.
 | paper result | scripts |
 |---|---|
 | Classical ML rows (Tables 2, 7) | `exp_scripts/baseline/run_all_baselines.sh` |
-| GNN rows | `train.py --model_name=gnn_only --no_llm ...` (see hybrid scripts) |
+| GNN rows | `exp_scripts/new-cls-head/gnn/gnn_only.sh` |
 | LLM full fine-tuning | `exp_scripts/new-cls-head/full/<model>.sh` |
 | LLM LoRA (r=128) | `exp_scripts/new-cls-head/lora/<model>.sh` |
 | LLM linear probing | `exp_scripts/new-cls-head/linear-probe/<family>/<model>.sh` |
