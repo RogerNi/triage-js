@@ -203,7 +203,7 @@ def main(args):
     # Load dataset
     if args.dataset == "full":
         data_module = ProvenanceGraphDataModule(
-            data_path="dataset",
+            data_path=args.data_folder,
             batch_size=256,
             seed=42,
             sample=-1,
@@ -420,6 +420,13 @@ if __name__ == "__main__":
         default="full",
         choices=["full", "dedup", "dup"],
         help="Dataset to use: full, dedup, or dup",
+    )
+
+    parser.add_argument(
+        "--data_folder",
+        type=str,
+        default="dataset",
+        help="Path to the data folder (e.g. dataset_demo for the demo subset).",
     )
     
     parser.add_argument(
