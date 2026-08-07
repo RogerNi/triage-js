@@ -1,0 +1,17 @@
+.git
+.gitignore
+make_demo_subset.py
+**/__pycache__
+*.pyc
+*.out
+slurm_logs/
+logs/
+tensorboard/
+wandb/
+_demo_out/
+_s/
+saved_models*/
+dataset/
+dataset_combined/
+dataset_noflow*/
+*.key
