@@ -22,6 +22,7 @@ Requires Docker + the **NVIDIA Container Toolkit** (for `--gpus`).
 | `docker/demo_lora.sh` | LLM LoRA | 1 | downloads LLM on first run |
 | `docker/demo_full_multigpu.sh` | LLM full fine-tune | 2 | downloads LLM on first run |
 | `docker/demo_hybrid_multigpu.sh` | GNN + LLM hybrid | 2 | downloads LLM on first run |
+| `docker/demo_zero_shot.sh` | zero-shot (local instruct LLM) | 1 | no training; prompts + generates Yes/No; downloads an instruct model |
 
 Example:
 

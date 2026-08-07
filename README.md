@@ -14,6 +14,31 @@ released publicly after the disclosure period completes; until then,
 researchers may request early access for research purposes only by contacting
 the authors (see "Dataset" below).
 
+## Getting Started
+
+The quickest way to exercise the artifact is the Docker image together with the
+included public demo subset (`dataset_demo/`) — this needs no benchmark access
+and no model download. Host prerequisites are x86-64, Docker with the NVIDIA
+Container Toolkit, and an NVIDIA GPU with a CUDA 12.6 driver.
+
+**Build** (from the repository root):
+
+```bash
+docker build -t triage-js:latest .
+```
+
+**GNN test** — GNN path on the demo subset, single GPU, ~1 minute, fully
+offline (no model download): `bash docker/demo_gnn.sh`. The run ends with `Training
+finished!` followed by a test-metrics line, e.g.:
+
+```
+{'test_accuracy': 0.85, 'test_f1': 0.909, 'test_precision': 0.833, 'test_recall': 1.0, ...}
+```
+
+which confirms data loading, training, and evaluation all work. `docker/README.md`
+gives one-command runners for every model family; "Claims supported and not
+supported" below states what the demo does and does not reproduce.
+
 ## Repository layout
 
 ```
@@ -26,10 +51,12 @@ model.py, ggnn.py           model definitions (classification head, GGNN)
 datamodule.py               dataset loading, splits, resampling
 openrouter.py               zero-shot inference via API models
 exp_scripts/                SLURM scripts reproducing every trained configuration
+docker/                     Docker run scripts, one per model family (see docker/README.md)
+Dockerfile                  container image definition
 environment.yml             conda environment specification
 ```
 
-## Installation
+## Installation (non-Docker)
 
 ```bash
 conda env create -f environment.yml
@@ -87,6 +114,25 @@ path runs end-to-end on the synthetic snippets, which demonstrates that the
 pipeline is functional but does not reproduce the paper's numbers on real code.
 The real code is part of the benchmark released after the disclosure period
 completes.
+
+## Claims supported and not supported
+
+**Supported by this artifact.** The artifact contains the complete
+training/evaluation pipeline for every model family evaluated in the paper —
+classical ML baselines, GNN, LLM linear-probing, LLM LoRA, LLM full
+fine-tuning, and the GNN+LLM hybrid — with per-configuration scripts
+(`exp_scripts/`) and one-command Docker runners (`docker/`). A reviewer can 
+build the image and run each model family end-to-end on the included demo
+subset (see "Getting Started" and `docker/README.md`).
+
+**Not reproducible from the public artifact, and why.**
+
+- **Exact table/figure numbers** cannot be reproduced from the public release:
+  the full benchmark (1,883 packages) is withheld under coordinated vulnerability
+  disclosure, so only a stratified 10% demo subset is public.
+- **Zero-shot frontier-API models** (OpenRouter) require a paid external service 
+  and API credentials and thus are not executable without API keys. The zero-shot *local* models are runnable via `docker/demo_zero_shot.sh`.
+
 
 ## Reproducing the paper's results
 
