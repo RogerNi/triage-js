@@ -32,8 +32,9 @@ offline (no model download): `bash docker/demo_gnn.sh`. The run ends with `Train
 finished!` followed by a test-metrics line, e.g.:
 
 ```
-{'test_accuracy': 0.85, 'test_f1': 0.909, 'test_precision': 0.833, 'test_recall': 1.0, ...}
+{'test_accuracy': 0.7, 'test_f1': 0.81, 'test_precision': 0.76, 'test_recall': 0.87, ...}
 ```
+(exact values vary by GPU/run.)
 
 which confirms data loading, training, and evaluation all work. `docker/README.md`
 gives one-command runners for every model family; "Claims supported and not
