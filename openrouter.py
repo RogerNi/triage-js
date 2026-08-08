@@ -109,12 +109,12 @@ for i, (pred, label) in enumerate(zip(predictions, labels)):
         
     else:
         # Treat as incorrect in strict evaluation
-        binary_preds_strict.append(0)
+        binary_preds_strict.append(1 - label)
         binary_labels_strict.append(1 if label == 1 else 0)
         invalid_count += 1
         invalid_indices.append(i)
 
-# Strict evaluation (invalids treated as "No")
+# Strict evaluation (invalids treated as incorrect)
 f1_strict = f1_score(binary_labels_strict, binary_preds_strict)
 precision_strict = precision_score(binary_labels_strict, binary_preds_strict)
 recall_strict = recall_score(binary_labels_strict, binary_preds_strict)

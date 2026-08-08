@@ -1,6 +1,22 @@
+# Third-Party Notices
+
+## DeepDFA
+
+The GGNN implementation in `ggnn.py` and the `FlowGNNGGNNModule` compatibility
+class used for learned attention pooling in `baseline.py` are adapted from
+DeepDFA's `FlowGNNGGNNModule`:
+
+https://github.com/ISU-PAAL/DeepDFA/blob/master/DDFA/code_gnn/models/flow_gnn/ggnn.py
+
+The adaptation replaces DGL operators with PyTorch Geometric operators and
+uses TRIAGE-JS graph features and data structures. The average- and max-pooling
+baseline implementations are not derived from DeepDFA.
+
+DeepDFA is distributed under the MIT License:
+
 MIT License
 
-Copyright (c) 2026 Ronghao Ni
+Copyright (c) 2024 Benjamin Jeremiah Steenhoek
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

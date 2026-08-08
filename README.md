@@ -4,7 +4,7 @@ Artifact for the paper *"Learning to Triage Vulnerability Reports from Program
 Analysis: An Empirical Study in Node.js"*. It contains the training/evaluation
 code for all model families evaluated in the paper (classical ML, GNN,
 fine-tuned LLMs, GNN+LLM hybrid, zero-shot LLMs), together with the dataset
-construction pipeline and the scripts that reproduce every configuration.
+construction pipeline and scripts for every configuration.
 
 The paper's evaluation uses the TRIAGE-JS benchmark (1,883 npm packages with
 taint flows reported by NodeMedic-FINE and human-reviewed exploitability
@@ -51,10 +51,11 @@ baseline.py                 classical ML baselines (RF, XGBoost, LogReg, SVM)
 model.py, ggnn.py           model definitions (classification head, GGNN)
 datamodule.py               dataset loading, splits, resampling
 openrouter.py               zero-shot inference via API models
-exp_scripts/                SLURM scripts reproducing every trained configuration
+exp_scripts/                SLURM scripts for every trained configuration
 docker/                     Docker run scripts, one per model family (see docker/README.md)
 Dockerfile                  container image definition
 environment.yml             conda environment specification
+THIRD_PARTY_NOTICES.md      attribution and licenses for adapted code
 ```
 
 ## Installation (non-Docker)
@@ -64,7 +65,8 @@ conda env create -f environment.yml
 conda activate torch-pyg
 ```
 
-Requirements: Python 3.10+, PyTorch + PyTorch Geometric, HuggingFace
+The provided Conda environment and Docker image pin Python 3.13.5. Other
+environments are not tested. Dependencies include PyTorch + PyTorch Geometric, HuggingFace
 `transformers`/`peft`/`bitsandbytes` (for 4-bit LoRA), `scikit-learn`,
 `xgboost`, `shap`. GPU experiments were run on NVIDIA H100 80GB (1 GPU for
 LoRA/linear-probe, 2 GPUs for full fine-tuning). Zero-shot API baselines
@@ -135,7 +137,7 @@ subset (see "Getting Started" and `docker/README.md`).
   and API credentials and thus are not executable without API keys. The zero-shot *local* models are runnable via `docker/demo_zero_shot.sh`.
 
 
-## Reproducing the paper's results
+## Running the paper's experiment configurations
 
 All experiments run 5 seeds (2025–2029) over the same fixed split. Scripts
 are SLURM batch files (`sbatch <script>`); adapt the headers to your cluster.

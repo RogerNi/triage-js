@@ -1,5 +1,7 @@
 """
 Gated Graph Neural Network module for graph classification tasks using PyG
+
+Adapted from DeepDFA's DGL FlowGNNGGNNModule. See THIRD_PARTY_NOTICES.md.
 """
 import torch
 from torch import nn

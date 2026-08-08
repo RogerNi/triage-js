@@ -39,6 +39,7 @@ python -u train.py \
   --max_grad_norm 1.0 \
   --evaluate_during_training \
   --no_llm \
+  --num_output_layers 1 \
   --dropout 0 \
   --weight_decay 1e-1 \
   --eval_steps 150 \

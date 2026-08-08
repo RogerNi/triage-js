@@ -38,6 +38,6 @@ HuggingFace cache (`$HOME/hf_cache`), and wandb disabled.
 ## Important notes
 
 - The demo `code` snippets are **synthetic** (see the main README).
-  Full reproduction needs the withheld benchmark via `exp_scripts/`.
+  Full-benchmark runs need the withheld benchmark via `exp_scripts/`.
 - Single GPU is enough for the GNN/baseline/linear-probe/LoRA demos; the
   full-fine-tune / hybrid demos shard the model across the GPUs listed in `CUDA`.
