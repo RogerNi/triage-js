@@ -8,18 +8,14 @@ construction pipeline and scripts for every configuration.
 
 The paper's evaluation uses the TRIAGE-JS benchmark (1,883 npm packages with
 taint flows reported by NodeMedic-FINE and human-reviewed exploitability
-labels). **The benchmark data is not yet public.** Because the confirmed
-exploitable packages are under coordinated disclosure, the benchmark will be
-released publicly after the disclosure period completes; until then,
-researchers may request early access for research purposes only by contacting
-the authors (see "Dataset" below).
+labels). The dataset is publicly available for research use. Download access
+can be requested by completing the Google Form listed in the "Dataset" section.
 
 ## Getting Started
 
 The quickest way to exercise the artifact is the Docker image together with the
-included public demo subset (`dataset_demo/`) — this needs no benchmark access
-and no model download. Host prerequisites are x86-64, Docker with the NVIDIA
-Container Toolkit, and an NVIDIA GPU with a CUDA 12.6 driver.
+included demo subset (`dataset_demo/`). Host prerequisites are x86-64, Docker
+with the NVIDIA Container Toolkit, and an NVIDIA GPU with a CUDA 12.6 driver.
 
 **Build** (from the repository root):
 
@@ -36,14 +32,12 @@ finished!` followed by a test-metrics line, e.g.:
 ```
 (exact values vary by GPU/run.)
 
-which confirms data loading, training, and evaluation all work. `docker/README.md`
-gives one-command runners for every model family; "Claims supported and not
-supported" below states what the demo does and does not reproduce.
+`docker/README.md` gives one-command runners for every model family.
 
 ## Repository layout
 
 ```
-dataset/                    TRIAGE-JS benchmark (NOT included — see "Dataset" below)
+dataset/                    TRIAGE-JS benchmark (download separately; see "Dataset")
 dataset_demo/               small public demo subset for functional testing (see "Demo subset")
 data_util/                  dataset construction pipeline (raw/preprocessed archives ship with the dataset)
 train.py                    GNN / LLM / hybrid training and evaluation entry point
@@ -89,11 +83,9 @@ were auto-confirmed by NodeMedic-FINE's exploit synthesis; the remaining 606
 train/validation/test (1,506/188/189), fixed via `--dataset_seed 42` across
 all experiments.
 
-**Data availability.** The benchmark data is **not included in this
-repository.** It will be made publicly available after the responsible
-disclosure period for the confirmed exploitable packages completes. Until
-then, researchers may request early access for research purposes only by
-contacting the authors.
+**Data availability.** The TRIAGE-JS dataset is publicly downloadable for
+research purposes. Request access using an institutional email address by
+completing the [Google Form](https://forms.gle/U73oakGxk3YrmNyu9).
 
 Once obtained, the dataset ships with the `data_util/` raw and preprocessed
 archives; unpack them and run `data_util/build_metadata_and_graph.py`
@@ -101,41 +93,15 @@ followed by `data_util/build_llm_input.py` to (re)build `dataset/`.
 
 ### Demo subset for functional testing
 
-So that users can understand the data format and test the functionality of the
-pipeline without access to the withheld benchmark, we provide a small demo
-subset in `dataset_demo/`. It is a stratified 10% sample of the graphs (188
-graphs, preserving the confirmed/false-alarm ratio) with the same schema and
-file layout as `dataset/`, so it is a drop-in `--data_folder` for `train.py`.
+`dataset_demo/` contains a small subset for testing the pipeline. It is a
+stratified 10% sample of the graphs (188 graphs, preserving the
+confirmed/false-alarm ratio) with the same schema and file layout as `dataset/`,
+so it is a drop-in `--data_folder` for `train.py`.
 
-It is noteworthy that the actual package source code in
-`node_information_per_graph.csv` has been **replaced with synthetic,
-clearly-marked snippets**, and all package-identifying fields (name, version,
-file path) have been redacted, so that no code or identity of a package under
-coordinated disclosure is published. The **provenance graphs and labels are the
-real benchmark values**, so the GNN path produces genuine results; the code/LLM
-path runs end-to-end on the synthetic snippets, which demonstrates that the
-pipeline is functional but does not reproduce the paper's numbers on real code.
-The real code is part of the benchmark released after the disclosure period
-completes.
-
-## Claims supported and not supported
-
-**Supported by this artifact.** The artifact contains the complete
-training/evaluation pipeline for every model family evaluated in the paper —
-classical ML baselines, GNN, LLM linear-probing, LLM LoRA, LLM full
-fine-tuning, and the GNN+LLM hybrid — with per-configuration scripts
-(`exp_scripts/`) and one-command Docker runners (`docker/`). A reviewer can 
-build the image and run each model family end-to-end on the included demo
-subset (see "Getting Started" and `docker/README.md`).
-
-**Not reproducible from the public artifact, and why.**
-
-- **Exact table/figure numbers** cannot be reproduced from the public release:
-  the full benchmark (1,883 packages) is withheld under coordinated vulnerability
-  disclosure, so only a stratified 10% demo subset is public.
-- **Zero-shot frontier-API models** (OpenRouter) require a paid external service 
-  and API credentials and thus are not executable without API keys. The zero-shot *local* models are runnable via `docker/demo_zero_shot.sh`.
-
+In `node_information_per_graph.csv`, package source code is replaced with
+clearly marked synthetic snippets, and identifying fields such as package name,
+version, and file path are redacted. The provenance graphs and labels retain
+the benchmark values.
 
 ## Running the paper's experiment configurations
 
@@ -157,10 +123,3 @@ are SLURM batch files (`sbatch <script>`); adapt the headers to your cluster.
 Expected runtimes per run (H100): linear probe 10–19 min, LoRA 30–58 min,
 full fine-tuning 60–70 min, GNN ~25 min, classical baselines < 1 min on CPU
 after feature extraction.
-
-## Notes
-
-- Vulnerability disclosures for confirmed exploitable packages follow a
-  coordinated disclosure process; the benchmark will be released publicly after
-  the disclosure period completes. Early access for research purposes only is
-  available by contacting the authors.
