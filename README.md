@@ -154,3 +154,25 @@ are SLURM batch files (`sbatch <script>`); adapt the headers to your cluster.
 | Full fine-tuning | 60–70 min on H100 |
 | GNN | ~25 min on H100 |
 | Classical baselines | < 1 min on CPU after feature extraction |
+
+## 📚 Citation
+
+If you use TRIAGE-JS in your research, please cite our
+[ASE 2026 paper](https://doi.org/10.1145/3832783.3837503):
+
+```bibtex
+@inproceedings{ni2026triage,
+  author    = {Ni, Ronghao and Yang, Aidan Z.H. and Hsu, Min-Chien and
+               Sabino, Nuno and Jia, Limin and Martins, Ruben and
+               Cassel, Darion and Cheang, Kevin},
+  title     = {Learning to Triage Vulnerability Reports from Program Analysis:
+               An Empirical Study in {Node.js}},
+  booktitle = {Proceedings of the 41st IEEE/ACM International Conference on Automated Software Engineering},
+  series    = {ASE '26},
+  year      = {2026},
+  pages     = {2626--2638},
+  publisher = {ACM},
+  doi       = {10.1145/3832783.3837503},
+  url       = {https://doi.org/10.1145/3832783.3837503}
+}
+```
